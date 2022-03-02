@@ -31,6 +31,8 @@ dependencies {
     implementation("org.springframework:spring-jdbc:5.3.15")
     implementation("org.hibernate:hibernate-core:5.6.5.Final")
     implementation("org.jetbrains.kotlin:kotlin-maven-noarg")
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.6")
+    implementation("org.springframework.boot:spring-boot-starter-validation:2.6.4")
     developmentOnly("org.springframework.boot:spring-boot-devtools:2.6.3")
     runtimeOnly("com.h2database:h2:2.1.210")
     runtimeOnly("mysql:mysql-connector-java:8.0.25")
