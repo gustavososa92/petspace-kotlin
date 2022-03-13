@@ -7,6 +7,9 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.H2Dialect
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
 
 datasource:
   host: mem
@@ -14,3 +17,16 @@ datasource:
   username: sa
   password: sa
   type: local-memory
+
+springdoc:
+  writer-with-default-pretty-printer: true
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  paths-to-match: /**
+  packages-to-scan: com.kotlin.petspace
+  show-actuator: true
+  swagger-ui:
+    operations-sorter: alpha
+    disable-swagger-default-url: true
+    path: /swagger-ui.html

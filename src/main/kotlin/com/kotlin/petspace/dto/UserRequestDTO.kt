@@ -1,9 +1,13 @@
 package com.kotlin.petspace.dto
 
+import com.fasterxml.jackson.annotation.JsonSubTypes
+import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer
+import com.kotlin.petspace.model.Institution
+import com.kotlin.petspace.model.Person
 import com.kotlin.petspace.model.User
 import com.kotlin.petspace.utils.fromJson
 import com.kotlin.petspace.utils.toJson
@@ -12,7 +16,13 @@ import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Past
-
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes(
+    value = [
+        JsonSubTypes.Type(value = Person::class, name = "Person"),
+        JsonSubTypes.Type(value = Institution::class, name = "Institution")
+    ]
+)
 abstract class UserRequestDTO {
     @NotBlank(message = "Debe ingresar el nombre")
     lateinit var name: String
@@ -41,10 +51,9 @@ abstract class UserRequestDTO {
     }
 }
 
-
 open class PersonRequestDTO() : UserRequestDTO() {
     @NotBlank(message = "Debe ingresar su apellido")
-    lateinit var lastaname: String
+    lateinit var lastname: String
 
     @NotBlank(message = "Debe ingresar su genero")
     lateinit var gender: String
@@ -57,15 +66,12 @@ class PersonWithPassDTO : PersonRequestDTO() {
 
 }
 
-
 open class InstitutionRequestDTO : UserRequestDTO() {
     @NotBlank(message = "Debe ingresar una descripcion")
     lateinit var description: String
-
 }
 
 class InstitutionWithPassDTO : InstitutionRequestDTO() {
     @NotBlank(message = "Debe ingresar la contraseña")
     lateinit var password: String
-
 }

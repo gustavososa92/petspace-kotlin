@@ -50,7 +50,7 @@ abstract class User {
     var phoneNumber: String? = null
 
     @Column
-    var isActive: Boolean = true
+    var active: Boolean = true
 
     abstract fun getIsAdmin(): Boolean
 
@@ -96,10 +96,10 @@ class Person : User() {
     var gender: String? = null
 
     @Column
-    var isAdmin: Boolean = false
+    var admin: Boolean = false
 
     override fun getIsAdmin(): Boolean {
-        return isAdmin
+        return admin
     }
 
     override fun getIsPerson(): Boolean {
