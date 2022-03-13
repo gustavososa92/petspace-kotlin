@@ -12,15 +12,15 @@ class UserService {
         TODO("Not yet implemented")
     }
 
-    fun registerUser(newUser: UserRequestDTO) {
+    fun registerUser(newUser: UserRequestDTO): UserLoginResponseDTO {
         TODO("Not yet implemented")
     }
 
-    fun updateUser(userId: Long, updatedUser: UserRequestDTO) {
+    fun updateUser(userId: Long, updatedUser: UserRequestDTO): UserResponseDTO {
         TODO("Not yet implemented")
     }
 
-    fun searchUserById(userId: Long) : UserResponseDTO {
+    fun searchUserById(userId: Long): UserResponseDTO {
         TODO("Not yet implemented")
     }
 

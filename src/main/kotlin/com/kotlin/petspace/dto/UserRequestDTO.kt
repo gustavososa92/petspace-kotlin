@@ -1,13 +1,12 @@
 package com.kotlin.petspace.dto
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer
-import com.kotlin.petspace.model.Institution
-import com.kotlin.petspace.model.Person
 import com.kotlin.petspace.model.User
 import com.kotlin.petspace.utils.fromJson
 import com.kotlin.petspace.utils.toJson
@@ -16,14 +15,21 @@ import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Past
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "user_type")
 @JsonSubTypes(
     value = [
-        JsonSubTypes.Type(value = Person::class, name = "Person"),
-        JsonSubTypes.Type(value = Institution::class, name = "Institution")
+        JsonSubTypes.Type(value = PersonRequestDTO::class, name = "Person"),
+        JsonSubTypes.Type(value = InstitutionRequestDTO::class, name = "Institution")
     ]
 )
 abstract class UserRequestDTO {
+
+    companion object {
+        const val TYPE_PERSON = "Person"
+        const val TYPE_INSTITUTION = "Institution"
+    }
+
     @NotBlank(message = "Debe ingresar el nombre")
     lateinit var name: String
 
@@ -43,7 +49,10 @@ abstract class UserRequestDTO {
     lateinit var phoneNumber: String
 
     @NotBlank(message = "Debe ingresar el tipo")
-    lateinit var type: String
+    lateinit var userType: String
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    lateinit var password: String
 
     fun toUser(): User {
         val json = toJson(this)
@@ -52,26 +61,24 @@ abstract class UserRequestDTO {
 }
 
 open class PersonRequestDTO() : UserRequestDTO() {
+
+    init {
+        userType = TYPE_PERSON
+    }
+
     @NotBlank(message = "Debe ingresar su apellido")
     lateinit var lastname: String
 
     @NotBlank(message = "Debe ingresar su genero")
     lateinit var gender: String
-
-}
-
-class PersonWithPassDTO : PersonRequestDTO() {
-    @NotBlank(message = "Debe ingresar la contraseña")
-    lateinit var password: String
-
 }
 
 open class InstitutionRequestDTO : UserRequestDTO() {
+
+    init {
+        userType = TYPE_INSTITUTION
+    }
+
     @NotBlank(message = "Debe ingresar una descripcion")
     lateinit var description: String
-}
-
-class InstitutionWithPassDTO : InstitutionRequestDTO() {
-    @NotBlank(message = "Debe ingresar la contraseña")
-    lateinit var password: String
 }
