@@ -62,8 +62,7 @@ class UserController(val userService: UserService) {
     @Operation(description = "Devuelve el usuario para armar el perfil.")
     fun deleteUser(
         @PathVariable userId: Long
-    ): Long {
+    ) {
         userService.deleteUserById(userId)
-        return userId
     }
 }
