@@ -46,8 +46,8 @@ class UserController(val userService: UserService) {
     fun updatePerson(
         @Valid @RequestBody updatedUser: UserRequestDTO,
         @PathVariable userId: Long
-    ): UserResponseDTO {
-        return userService.updateUser(userId, updatedUser)
+    ) {
+        userService.updateUser(userId, updatedUser)
     }
 
     @GetMapping("/{userId}/profile")
@@ -55,7 +55,7 @@ class UserController(val userService: UserService) {
     fun getProfile(
         @PathVariable userId: Long
     ): UserResponseDTO {
-        return userService.searchUserById(userId)
+        return userService.searchUserDTOById(userId)
     }
 
     @DeleteMapping("/{userId}/delete")

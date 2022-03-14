@@ -17,7 +17,7 @@ import javax.persistence.Inheritance
 import javax.persistence.InheritanceType
 
 @Entity
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "user_type")
 @JsonSubTypes(
     value = [
         JsonSubTypes.Type(value = Person::class, name = "Person"),
@@ -59,15 +59,6 @@ abstract class User {
 
     abstract fun getFullName(): String
 
-    open fun merge(updatedUser: User) {
-        name = updatedUser.name ?: name
-        userEmail = updatedUser.userEmail ?: userEmail
-        password = updatedUser.password ?: password
-        address = updatedUser.address ?: address
-        birthDate = updatedUser.birthDate ?: birthDate
-        phoneNumber = updatedUser.phoneNumber ?: phoneNumber
-    }
-
     fun validatePassword(password1: String, password2: String) {
         if (password1 != password2) {
             throw RuntimeException("Usuario o password incorrecta!")
@@ -108,13 +99,6 @@ class Person : User() {
 
     override fun getFullName(): String {
         return "$name $lastname"
-    }
-
-    override fun merge(updatedUser: User) {
-        super.merge(updatedUser)
-        updatedUser as Person
-        gender = updatedUser.gender ?: gender
-        lastname = updatedUser.lastname ?: lastname
     }
 
     override fun validateProfile() {
