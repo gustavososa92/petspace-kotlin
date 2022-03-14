@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer
+import com.kotlin.petspace.exceptions.ValidationException
 import java.time.LocalDate
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -75,14 +76,13 @@ abstract class User {
 
     open fun validateProfile() {
         if (name.isNullOrBlank()) {
-            throw RuntimeException("Debe cargar el nombre")
+            throw ValidationException("Debe cargar el nombre")
         }
 
         if (birthDate == null) {
-            throw RuntimeException("Debe cargar una fecha de nacimiento")
+            throw ValidationException("Debe cargar una fecha de nacimiento")
         }
     }
-
 
 }
 
