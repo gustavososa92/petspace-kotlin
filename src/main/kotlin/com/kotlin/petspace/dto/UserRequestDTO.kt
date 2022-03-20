@@ -7,9 +7,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer
+import com.kotlin.basecomponents.util.fromJson
+import com.kotlin.basecomponents.util.toJson
 import com.kotlin.petspace.model.User
-import com.kotlin.petspace.utils.fromJson
-import com.kotlin.petspace.utils.toJson
 import java.time.LocalDate
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank

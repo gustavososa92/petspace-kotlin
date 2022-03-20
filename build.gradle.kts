@@ -26,7 +26,7 @@ repositories {
 val kotestVersion = "5.1.0"
 
 dependencies {
-    implementation(kotlin("stdlib"))
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.10")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.6.4")
     implementation("org.springframework.boot:spring-boot-starter-web:2.6.4")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.1")
@@ -38,6 +38,7 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-ui:1.6.6")
     implementation("org.springframework.boot:spring-boot-starter-validation:2.6.4")
     implementation("org.modelmapper:modelmapper:3.0.0")
+    implementation("com.fasterxml.jackson.module:jackson-module-afterburner:2.13.2")
     developmentOnly("org.springframework.boot:spring-boot-devtools:2.6.4")
     runtimeOnly("com.h2database:h2:1.4.198")
     runtimeOnly("mysql:mysql-connector-java:8.0.28")
@@ -71,9 +72,9 @@ jacoco {
 
 tasks.jacocoTestReport {
     reports {
-        xml.isEnabled = true
-        csv.isEnabled = false
-        html.isEnabled = false
+        xml.required.set(true)
+        csv.required.set(false)
+        html.required.set(false)
     }
 }
 

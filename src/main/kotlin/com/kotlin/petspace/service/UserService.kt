@@ -1,8 +1,13 @@
 package com.kotlin.petspace.service
 
-import com.kotlin.petspace.dto.*
-import com.kotlin.petspace.exceptions.ElementNotFoundException
-import com.kotlin.petspace.exceptions.ValidationException
+import com.kotlin.basecomponents.exceptions.ElementNotFoundException
+import com.kotlin.basecomponents.exceptions.ValidationException
+import com.kotlin.petspace.dto.InstitutionResponseDTO
+import com.kotlin.petspace.dto.PersonResponseDTO
+import com.kotlin.petspace.dto.UserLoginRequestDTO
+import com.kotlin.petspace.dto.UserLoginResponseDTO
+import com.kotlin.petspace.dto.UserRequestDTO
+import com.kotlin.petspace.dto.UserResponseDTO
 import com.kotlin.petspace.model.Institution
 import com.kotlin.petspace.model.Person
 import com.kotlin.petspace.model.User

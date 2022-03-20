@@ -1,4 +1,4 @@
-package com.kotlin.petspace.exceptions
+package com.kotlin.basecomponents.exceptions
 
 
 class BadRequestException(message: String) : RuntimeException(message)
@@ -15,7 +15,7 @@ class ElementNotFoundException : RuntimeException {
 }
 
 class InvalidElementException(message: String) : RuntimeException(message) {
-    private var validationErrors: Map<String, String> = HashMap()
+    var validationErrors: Map<String, String> = HashMap()
 
     constructor() : this(DEFAULT_MESSAGE) {}
     constructor(validationErrors: Map<String, String>) : this(DEFAULT_MESSAGE) {

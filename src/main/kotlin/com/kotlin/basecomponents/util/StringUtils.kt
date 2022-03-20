@@ -1,4 +1,4 @@
-package com.kotlin.petspace.utils
+package com.kotlin.basecomponents.util
 
 fun camelToSnake(str: String): String {
     val regex = "([a-z])([A-Z]+)"
