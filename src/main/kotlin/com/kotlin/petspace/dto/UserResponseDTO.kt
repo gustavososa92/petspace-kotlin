@@ -26,23 +26,12 @@ abstract class UserResponseDTO(user: User) {
 }
 
 class PersonResponseDTO(user: Person) : UserResponseDTO(user as User) {
-    //    override lateinit var name: String
-//    override lateinit var userEmail: String
-//    override lateinit var address: String
-//    override lateinit var birthDate: LocalDate
-//    override lateinit var phoneNumber: String
     override var type: String = "Person"
     override var isPerson: Boolean = true
     var lastname: String
     var gender: String
 
     init {
-//        userId = user.id
-//        name = user.name
-//        userEmail = user.userEmail
-//        address = user.address
-//        birthDate = user.birthDate
-//        phoneNumber = user.phoneNumber
         lastname = user.lastname!!
         gender = user.gender!!
     }
@@ -51,23 +40,12 @@ class PersonResponseDTO(user: Person) : UserResponseDTO(user as User) {
 
 
 open class InstitutionResponseDTO(user: Institution) : UserResponseDTO(user as User) {
-    //    override lateinit var name: String
-//    override lateinit var userEmail: String
-//    override lateinit var address: String
-//    override lateinit var birthDate: LocalDate
-//    override lateinit var phoneNumber: String
     override var type: String = "Institution"
     override var isPerson: Boolean = false
     var description: String
 
 
     init {
-//        userId = user.id
-//        name = user.name
-//        userEmail = user.userEmail
-//        address = user.address
-//        birthDate = user.birthDate
-//        phoneNumber = user.phoneNumber
         description = user.description!!
     }
 

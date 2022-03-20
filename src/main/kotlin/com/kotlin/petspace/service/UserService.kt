@@ -1,11 +1,6 @@
 package com.kotlin.petspace.service
 
-import com.kotlin.petspace.dto.InstitutionResponseDTO
-import com.kotlin.petspace.dto.PersonResponseDTO
-import com.kotlin.petspace.dto.UserLoginRequestDTO
-import com.kotlin.petspace.dto.UserLoginResponseDTO
-import com.kotlin.petspace.dto.UserRequestDTO
-import com.kotlin.petspace.dto.UserResponseDTO
+import com.kotlin.petspace.dto.*
 import com.kotlin.petspace.exceptions.ElementNotFoundException
 import com.kotlin.petspace.exceptions.ValidationException
 import com.kotlin.petspace.model.Institution
@@ -27,7 +22,7 @@ class UserService(
     }
 
     fun registerUser(newUser: UserRequestDTO): UserLoginResponseDTO {
-        if (alreadyRegistered(newUser.userEmail)) throw ValidationException("Mail ya registrado")
+        if (alreadyRegistered(newUser.userEmail)) throw ValidationException("Mail already registered")
         val user = saveUser(newUser.toUser())
         return UserLoginResponseDTO.toDTO(user)
     }
@@ -35,7 +30,7 @@ class UserService(
     fun updateUser(userId: Long, updatedUser: UserRequestDTO) {
         val actual = searchUserById(userId)
         val updated = updatedUser.toUser()
-        if (actual.getIsPerson() != updated.getIsPerson()) throw ValidationException("Error en tipo de usuario")
+        if (actual.getIsPerson() != updated.getIsPerson()) throw ValidationException("Error on user type")
         updated.id = actual.id
         updated.password = actual.password
         saveUser(updated)

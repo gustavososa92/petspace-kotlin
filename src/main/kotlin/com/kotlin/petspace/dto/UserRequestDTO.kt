@@ -30,25 +30,25 @@ abstract class UserRequestDTO {
         const val TYPE_INSTITUTION = "Institution"
     }
 
-    @NotBlank(message = "Debe ingresar el nombre")
+    @NotBlank(message = "Name is mandatory")
     lateinit var name: String
 
-    @Email(message = "Debe ingresar un mail válido")
+    @Email(message = "Email is mandatory")
     lateinit var userEmail: String
 
-    @NotBlank(message = "Debe ingresar una dirección")
+    @NotBlank(message = "Address is mandatory")
     lateinit var address: String
 
     @JsonDeserialize(using = LocalDateDeserializer::class)
     @JsonSerialize(using = LocalDateSerializer::class)
-    @NotNull(message = "Debe ingresar la fecha de nacimiento")
-    @Past(message = "Debe ingresar una fecha válida")
+    @NotNull(message = "Birthdate is mandatory")
+    @Past(message = "Invalid date")
     lateinit var birthDate: LocalDate
 
-    @NotBlank(message = "Debe ingresar su telefono")
+    @NotBlank(message = "Phone number is mandatory")
     lateinit var phoneNumber: String
 
-    @NotBlank(message = "Debe ingresar el tipo")
+    @NotBlank(message = "User type is mandatory")
     lateinit var userType: String
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -66,10 +66,10 @@ open class PersonRequestDTO() : UserRequestDTO() {
         userType = TYPE_PERSON
     }
 
-    @NotBlank(message = "Debe ingresar su apellido")
+    @NotBlank(message = "Lastname is mandatory")
     lateinit var lastname: String
 
-    @NotBlank(message = "Debe ingresar su genero")
+    @NotBlank(message = "Gender is mandatory")
     lateinit var gender: String
 }
 
@@ -79,6 +79,6 @@ open class InstitutionRequestDTO : UserRequestDTO() {
         userType = TYPE_INSTITUTION
     }
 
-    @NotBlank(message = "Debe ingresar una descripcion")
+    @NotBlank(message = "Description is mandatory")
     lateinit var description: String
 }

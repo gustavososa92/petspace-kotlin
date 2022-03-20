@@ -1,11 +1,11 @@
 package com.kotlin.petspace.errors
 
 import com.kotlin.petspace.utils.camelToSnake
-import java.time.LocalDateTime
-import java.util.*
 import org.springframework.http.HttpStatus
 import org.springframework.validation.FieldError
 import org.springframework.web.bind.MethodArgumentNotValidException
+import java.time.LocalDateTime
+import java.util.*
 
 open class ApiError(var message: String, var status: Int) {
 

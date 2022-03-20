@@ -13,9 +13,9 @@ data class UserLoginResponseDTO(val userId: Long, val isPerson: Boolean, val isA
 }
 
 data class UserLoginRequestDTO(
-    @Email(message = "Debe ingresar un mail válido")
+    @Email(message = "Email is mandatory")
     var userEmail: String,
 
-    @NotBlank(message = "Debe ingresar la contraseña")
+    @NotBlank(message = "Password is mandatory")
     var password: String
 )

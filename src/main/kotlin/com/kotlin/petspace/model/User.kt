@@ -8,13 +8,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer
 import com.kotlin.petspace.exceptions.ValidationException
 import java.time.LocalDate
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.Inheritance
-import javax.persistence.InheritanceType
+import javax.persistence.*
 
 @Entity
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "user_type")
@@ -61,17 +55,17 @@ abstract class User {
 
     fun validatePassword(password1: String, password2: String) {
         if (password1 != password2) {
-            throw RuntimeException("Usuario o password incorrecta!")
+            throw ValidationException("User or password incorrect!")
         }
     }
 
     open fun validateProfile() {
         if (name.isNullOrBlank()) {
-            throw ValidationException("Debe cargar el nombre")
+            throw ValidationException("Name is mandatory")
         }
 
         if (birthDate == null) {
-            throw ValidationException("Debe cargar una fecha de nacimiento")
+            throw ValidationException("Birthdate is mandatory")
         }
     }
 
@@ -104,7 +98,7 @@ class Person : User() {
     override fun validateProfile() {
         super.validateProfile()
         if (lastname.isNullOrBlank()) {
-            throw RuntimeException("Debe cargar el apellido")
+            throw ValidationException("Lastname is mandatory")
         }
     }
 

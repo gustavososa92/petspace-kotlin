@@ -7,7 +7,7 @@ fun camelToSnake(str: String): String {
 }
 
 fun snakeToCamel(str: String): String {
-    var newStr=str
+    var newStr = str
     while (newStr.contains("_")) {
         newStr = newStr.replaceFirst(
             "_[a-z]".toRegex(), newStr[newStr.indexOf("_") + 1].uppercase()
